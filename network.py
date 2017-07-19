@@ -38,7 +38,7 @@ class data(object):
 
 #Definition of the Neural Network
 def deepnn(x):
-    x_image = tf.reshape(x, [-1, 28, 28, 1])
+    x_image = tf.cast((tf.reshape(x, [-1, 28, 28, 1])),tf.float32)
 
     # First convolutional layer - maps one grayscale image to 32 feature maps.
     W_conv1 = weight_variable([5, 5, 1, 32])
@@ -128,7 +128,8 @@ def main(_):
                     batch_images, y_: batch_labels, keep_prob: 1.0})
                 print('step %d, training accuracy %g' % (number, train_accuracy)) #Prints accuracy every 100 steps
             train_step.run(feed_dict={x: batch_images, y_: batch_labels, keep_prob: 0.5})
-        new_test_labels = np.reshape(test_labels, [1000,10])
+        #Testing
+        new_test_labels = np.eye(10)[test_labels]
         print('test accuracy %g' % accuracy.eval(feed_dict={x: test_images, y_: new_test_labels, keep_prob: 1.0}))
 
 if __name__ == '__main__':
