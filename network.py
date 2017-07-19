@@ -128,7 +128,8 @@ def main(_):
                     batch_images, y_: batch_labels, keep_prob: 1.0})
                 print('step %d, training accuracy %g' % (number, train_accuracy)) #Prints accuracy every 100 steps
             train_step.run(feed_dict={x: batch_images, y_: batch_labels, keep_prob: 0.5})
-        print('test accuracy %g' % accuracy.eval(feed_dict={x: test_images, y_: test_labels, keep_prob: 1.0}))
+        new_test_labels = np.reshape(test_labels, [1000,10])
+        print('test accuracy %g' % accuracy.eval(feed_dict={x: test_images, y_: new_test_labels, keep_prob: 1.0}))
 
 if __name__ == '__main__':
     tf.app.run(main=main)
