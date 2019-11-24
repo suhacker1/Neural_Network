@@ -24,7 +24,7 @@ class data(object):
     def __init__(self, images, labels):
         self.i = images
         self.l = labels
-        #Function to create a batch of data
+        #Create a batch of data
     def nextbatch(self,images, labels, batch_size):
         #Permutes images and labels in unison
         permutation = np.random.permutation(len(images))
